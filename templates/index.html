@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard - Pumpkin Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🎃</span>
+                <h1>CropGuard</h1>
+            </div>
+            <p class="tagline">Field-Robust Pumpkin Leaf Disease Detection</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <a href="/" class="nav-link active">
+                <span class="nav-icon">📷</span>
+                Capture
+            </a>
+            <a href="/history" class="nav-link">
+                <span class="nav-icon">📊</span>
+                History
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            {% if not model_loaded %}
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <strong>Model Not Loaded</strong>
+                    <p>Please place your trained model (.h5 file) in the 'models/' directory and restart the server.</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-icon">📸</div>
+                <h2>Capture or Upload Leaf Image</h2>
+                <p class="instruction">Take a clear photo of a single pumpkin leaf for diagnosis</p>
+
+                <!-- File Input -->
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept="image/*" capture="environment" style="display: none;">
+                    <label for="fileInput" class="upload-label">
+                        <span class="upload-text">
+                            <span class="icon">📁</span>
+                            <span>Choose Image or Tap to Capture</span>
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Preview Area -->
+                <div id="previewSection" style="display: none;">
+                    <img id="imagePreview" alt="Preview">
+                    <div class="preview-actions">
+                        <button class="btn btn-secondary" onclick="resetUpload()">
+                            <span class="icon">🔄</span> Retake
+                        </button>
+                        <button class="btn btn-primary" onclick="analyzeImage()" id="analyzeBtn">
+                            <span class="icon">🔍</span> Analyze
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingSection" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Analyzing image...</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" style="display: none;">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h3>Diagnosis Result</h3>
+                        <span class="confidence-badge" id="confidenceBadge"></span>
+                    </div>
+                    
+                    <div class="result-image-container">
+                        <img id="resultImage" alt="Analyzed leaf">
+                    </div>
+
+                    <div class="result-info">
+                        <div class="disease-name" id="diseaseName"></div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+                        <p class="confidence-text" id="confidenceText"></p>
+                    </div>
+
+                    <!-- All Predictions -->
+                    <div class="all-predictions">
+                        <h4>All Disease Probabilities</h4>
+                        <div id="allPredictions"></div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="result-actions">
+                        <button class="btn btn-secondary" onclick="resetUpload()">
+                            <span class="icon">📷</span> New Image
+                        </button>
+                        <button class="btn btn-success" onclick="viewHistory()">
+                            <span class="icon">📊</span> View History
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Section -->
+            <div id="errorSection" style="display: none;">
+                <div class="alert alert-error">
+                    <span class="alert-icon">❌</span>
+                    <div>
+                        <strong>Error</strong>
+                        <p id="errorMessage"></p>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="resetUpload()">Try Again</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>CropGuard v1.0 - Powered by MobileNetV3-Small</p>
+            <p class="footer-note">⚡ Optimized for edge devices | 🔒 Data stays on your device</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

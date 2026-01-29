@@ -1,0 +1,30 @@
+[
+  {
+    "filename": "20260128_122514_Augmented_Sweet_Pumpkin_Downy_Mildew_Disease_11.jpg",
+    "predicted_class": "Healthy",
+    "confidence": 0.25,
+    "timestamp": "2026-01-28 12:25:16",
+    "risk_level": "Low Confidence - Retake Recommended"
+  },
+  {
+    "filename": "20260128_122537_Healthy_Leaf_1.jpg",
+    "predicted_class": "Healthy",
+    "confidence": 0.25,
+    "timestamp": "2026-01-28 12:25:37",
+    "risk_level": "Low Confidence - Retake Recommended"
+  },
+  {
+    "filename": "20260128_122548_Augmented_Sweet_Pumpkin_Leaf_Curl_Disease_2.jpg",
+    "predicted_class": "Healthy",
+    "confidence": 0.25,
+    "timestamp": "2026-01-28 12:25:48",
+    "risk_level": "Low Confidence - Retake Recommended"
+  },
+  {
+    "filename": "20260128_122758_Augmented_Sweet_Pumpkin_Mosaic_Disease_2.jpg",
+    "predicted_class": "Healthy",
+    "confidence": 0.25,
+    "timestamp": "2026-01-28 12:27:58",
+    "risk_level": "Low Confidence - Retake Recommended"
+  }
+]
