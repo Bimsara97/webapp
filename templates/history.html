@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History - CropGuard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎃</text></svg>">
 </head>
 <body>
     <div class="container">
@@ -14,18 +16,18 @@
                 <span class="logo-icon">🎃</span>
                 <h1>CropGuard</h1>
             </div>
-            <p class="tagline">Prediction History</p>
+            <p class="tagline">📊 Prediction History & Analysis</p>
         </header>
 
         <!-- Navigation -->
         <nav class="nav-bar">
             <a href="/" class="nav-link">
                 <span class="nav-icon">📷</span>
-                Capture
+                <span>Capture</span>
             </a>
             <a href="/history" class="nav-link active">
                 <span class="nav-icon">📊</span>
-                History
+                <span>History</span>
             </a>
         </nav>
 
@@ -34,11 +36,13 @@
             <div class="history-section">
                 <h2>
                     <span class="icon">📋</span>
-                    Recent Predictions
+                    Recent Diagnoses
                 </h2>
                 
                 {% if predictions %}
-                    <p class="history-count">Showing {{ predictions|length }} recent predictions</p>
+                    <p class="history-count">
+                        📈 Showing <strong>{{ predictions|length }}</strong> recent predictions
+                    </p>
                     
                     <div class="history-list">
                         {% for pred in predictions %}
@@ -46,14 +50,28 @@
                             <div class="history-image">
                                 <img src="{{ url_for('static', filename='uploads/' + pred.filename) }}" 
                                      alt="Leaf image"
-                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23ddd%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23e5e7eb%22 width=%22100%22 height=%22100%22 rx=%2210%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%2394a3b8%22 font-size=%2214%22%3E🖼️ Image%3C/text%3E%3C/svg%3E'">
                             </div>
                             <div class="history-info">
-                                <div class="history-disease">{{ pred.predicted_class }}</div>
-                                <div class="history-confidence">
-                                    Confidence: {{ "%.1f"|format(pred.confidence * 100) }}%
+                                <div class="history-disease">
+                                    {% if pred.predicted_class == 'Healthy' %}
+                                        ✅ {{ pred.predicted_class }}
+                                    {% elif pred.predicted_class == 'Downy Mildew' %}
+                                        🦠 {{ pred.predicted_class }}
+                                    {% elif pred.predicted_class == 'Leaf Curl' %}
+                                        🍃 {{ pred.predicted_class }}
+                                    {% elif pred.predicted_class == 'Mosaic Virus' %}
+                                        🔬 {{ pred.predicted_class }}
+                                    {% else %}
+                                        🔍 {{ pred.predicted_class }}
+                                    {% endif %}
                                 </div>
-                                <div class="history-timestamp">{{ pred.timestamp }}</div>
+                                <div class="history-confidence">
+                                    📊 Confidence: <strong>{{ "%.1f"|format(pred.confidence * 100) }}%</strong>
+                                </div>
+                                <div class="history-timestamp">
+                                    🕒 {{ pred.timestamp }}
+                                </div>
                                 <span class="history-badge 
                                     {% if pred.confidence >= 0.9 %}badge-high
                                     {% elif pred.confidence >= 0.7 %}badge-medium
@@ -67,11 +85,11 @@
                     </div>
                 {% else %}
                     <div class="empty-state">
-                        <div class="empty-icon">📭</div>
-                        <h3>No predictions yet</h3>
-                        <p>Start by capturing or uploading a leaf image</p>
+                        <div class="empty-icon">🔭</div>
+                        <h3>No Predictions Yet</h3>
+                        <p>Start diagnosing pumpkin leaves to build your history</p>
                         <a href="/" class="btn btn-primary">
-                            <span class="icon">📷</span> Capture Image
+                            <span class="icon">📷</span> Start Diagnosis
                         </a>
                     </div>
                 {% endif %}
@@ -80,8 +98,8 @@
 
         <!-- Footer -->
         <footer>
-            <p>CropGuard v1.0 - Powered by MobileNetV3-Small</p>
-            <p class="footer-note">⚡ Optimized for edge devices | 🔒 Data stays on your device</p>
+            <p>🌱 <strong>CropGuard v1.0</strong> - Developed by U.J Tharushi Thathsarani</p>
+            <p class="footer-note">⚡ Powered by MobileNetV3-Small | 🔒 Privacy-First | 🌍 Edge-Optimized</p>
         </footer>
     </div>
 </body>
