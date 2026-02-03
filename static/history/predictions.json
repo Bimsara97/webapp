@@ -159,5 +159,12 @@
     "confidence": 0.9279100517935147,
     "timestamp": "2026-02-03 13:20:35",
     "risk_level": "High Confidence"
+  },
+  {
+    "filename": "20260203_133659_Augmented_Sweet_Pumpkin_Leaf_Curl_Disease_58.jpg",
+    "predicted_class": "Leaf Curl",
+    "confidence": 0.9468281547628346,
+    "timestamp": "2026-02-03 13:36:59",
+    "risk_level": "High Confidence"
   }
 ]
