@@ -230,11 +230,11 @@ def upload_file():
         file.save(filepath)
         
         try:
-            # SIMULATION MODE: Generate fake prediction based on filename
+
             print(f"🎭 Simulating prediction for: {original_filename}")
             predictions = simulate_prediction(original_filename)
-            
-            # Small delay to simulate processing time (makes it feel more real)
+
+
             import time
             time.sleep(random.uniform(0.1, 0.3))
             
